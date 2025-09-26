@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+
+    <script>
+        let items = ["Cow", "Hotdog" , "Car" , "House"];
+        let sCart = [];
+        drawView()
+        function drawView(){
+            document.getElementById('app').innerHTML = /*html*/ `
+            <div><input onchange="newItem(this.value)"></div>
+            ${store()}
+            <div>___^^_____store____^^___</div>
+            ${cart()}
+            <div>___^^_____cart____^^___</div>
+            `
+        }
+    function store(){
+        let html = "";
+        for(i = 0; i < items.length; i++){
+
+            html += `<button onclick="takeItem(innerText)">${items[i]}</button>`
+        }
+        return html
+    }
+        function cart(){
+        let html = "";
+        for(i = 0; i < sCart.length; i++){
+
+            html += `<button onclick="unTakeItem(innerText)">${sCart[i]}</button>`
+        }
+        return html
+    }
+    function newItem(input){
+        items.push(input)
+        drawView()
+    }
+    function takeItem(innerText){
+        items.splice(Number(innerText), 1)
+        sCart.push(innerText)
+        drawView()
+    }
+    function unTakeItem(innerText){
+        sCart.splice(Number(innerText), 1)
+        items.push(innerText)
+        drawView()
+    }
+
+
+
+    </script>
+</body>
+</html>
